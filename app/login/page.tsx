@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
+import { useAuth } from '../../contexts/AuthContext'
 import Link from 'next/link'
 
 export default function Login() {
@@ -11,6 +12,30 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+  const { user, loading: authLoading } = useAuth()
+
+  // 如果用戶已登入，重定向到首頁
+  useEffect(() => {
+    if (!authLoading && user) {
+      router.push('/')
+    }
+  }, [user, authLoading, router])
+
+  // 如果正在檢查認證狀態，顯示載入中
+  if (authLoading) {
+    return (
+      <div className="auth-container">
+        <div className="auth-form-container">
+          <div className="loading-message">載入中...</div>
+        </div>
+      </div>
+    )
+  }
+
+  // 如果用戶已登入，不渲染登入表單
+  if (user) {
+    return null
+  }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()

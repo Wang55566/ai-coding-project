@@ -18,7 +18,9 @@ export default function Header() {
       <header className="header">
         <div className="container">
           <div className="header-content">
-            <h1 className="logo">任務管理系統</h1>
+            <Link href="/" className="logo-link">
+              <h1 className="logo">任務管理系統</h1>
+            </Link>
             <div>載入中...</div>
           </div>
         </div>
@@ -31,7 +33,9 @@ export default function Header() {
       <div className="container">
         <div className="header-content">
           <div className="logo-section">
-            <h1 className="logo">任務管理系統</h1>
+            <Link href="/" className="logo-link">
+              <h1 className="logo">任務管理系統</h1>
+            </Link>
             {!user && (
               <p className="tagline">歡迎來到我們的平台</p>
             )}

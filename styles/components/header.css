@@ -25,6 +25,17 @@
   gap: 0.25rem;
 }
 
+.logo-link {
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-link:hover {
+  transform: scale(1.05);
+}
+
 .logo {
   font-size: 2rem;
   font-weight: 800;
@@ -37,8 +48,11 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.logo:hover {
-  transform: scale(1.05);
+.logo-link:hover .logo {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .tagline {

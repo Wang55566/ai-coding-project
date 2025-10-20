@@ -33,3 +33,12 @@
   width: 100%;
   text-align: center;
 }
+
+/* Loading State */
+.loading-message {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
