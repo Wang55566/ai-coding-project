@@ -2,18 +2,18 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
   try {
-    const { prompt } = await request.json()
+    const { content } = await request.json()
 
-    if (!prompt || typeof prompt !== 'string' || prompt.trim().length === 0) {
+    if (!content || typeof content !== 'string' || content.trim().length === 0) {
       return NextResponse.json(
-        { error: '請提供有效的任務描述' },
+        { error: '請提供有效的任務內容' },
         { status: 400 }
       )
     }
 
-    if (prompt.length > 500) {
+    if (content.length > 500) {
       return NextResponse.json(
-        { error: '任務描述過長，請控制在500字以內' },
+        { error: '任務內容過長，請控制在500字以內' },
         { status: 400 }
       )
     }
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
       )
     }
     
-    const result = await generateTaskWithOpenAI(prompt)
+    const result = await improveContentWithOpenAI(content)
     return NextResponse.json(result)
 
   } catch (error) {
@@ -45,33 +45,45 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { error: '生成任務失敗，請稍後再試' },
+      { error: '內容改善失敗，請稍後再試' },
       { status: 500 }
     )
   }
 }
 
-async function generateTaskWithOpenAI(prompt: string) {
+async function improveContentWithOpenAI(content: string) {
   const { default: OpenAI } = await import('openai')
   
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   })
 
+  // 根據內容長度決定處理方式
+  const contentLength = content.trim().length
+  let systemPrompt = ''
+  
+  if (contentLength > 100) {
+    // 長內容：提供摘要
+    systemPrompt = '你是一個任務管理助手。請將以下任務內容整理成簡潔的摘要，保留重要資訊但去除冗餘部分。請直接返回摘要內容，不要額外說明。'
+  } else {
+    // 短內容：提供改善建議
+    systemPrompt = '你是一個任務管理助手。請優化以下任務內容，讓它更清晰、結構化。改善文字表達、增加重點、如果需要可以分點列出。請直接返回改善後的內容，不要額外說明。'
+  }
+
   const completion = await openai.chat.completions.create({
     model: 'gpt-3.5-turbo',
     messages: [
       {
         role: 'system',
-        content: '你是一個任務管理助手。根據用戶的描述，生成一個清晰的任務標題和詳細內容。請以 JSON 格式回應，格式如下：{"title": "任務標題", "content": "任務詳細內容"}'
+        content: systemPrompt
       },
       {
         role: 'user',
-        content: prompt.trim()
+        content: content.trim()
       }
     ],
     temperature: 0.7,
-    max_tokens: 500,
+    max_tokens: 300,
   })
 
   const response = completion.choices[0]?.message?.content
@@ -80,25 +92,8 @@ async function generateTaskWithOpenAI(prompt: string) {
     throw new Error('OpenAI API 沒有返回內容')
   }
 
-  try {
-    const parsedResponse = JSON.parse(response)
-    
-    if (!parsedResponse.title || !parsedResponse.content) {
-      throw new Error('AI 回應格式不正確')
-    }
-
-    return {
-      title: parsedResponse.title.trim(),
-      content: parsedResponse.content.trim()
-    }
-  } catch (parseError) {
-    const lines = response.split('\n').filter(line => line.trim())
-    const title = lines[0]?.replace(/^[#-*\s]*/, '').trim() || '新任務'
-    const content = lines.slice(1).join('\n').trim() || '請補充任務詳細內容'
-    
-    return {
-      title,
-      content
-    }
+  return {
+    improvedContent: response.trim(),
+    type: contentLength > 100 ? 'summary' : 'improvement'
   }
 }

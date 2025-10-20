@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
 import type { Task, CreateTaskData, UpdateTaskData } from '../lib/types'
-import AITaskGenerator from './AITaskGenerator'
+import AIContentSuggestion from './AIContentSuggestion'
 import TagInput from './TagInput'
 import TagBadge from './TagBadge'
 
@@ -148,12 +148,6 @@ export default function TaskList() {
     setEditTask({ title: '', content: '', tags: [] })
   }
 
-  // AI 生成任務回調
-  const handleAIGenerated = (title: string, content: string) => {
-    setNewTask({ title, content, tags: [] })
-    setIsAdding(true)
-  }
-
   // 搜尋功能
   const handleSearch = (query: string) => {
     setSearchQuery(query)
@@ -238,7 +232,11 @@ export default function TaskList() {
                 onChange={(e) => setNewTask({ ...newTask, content: e.target.value })}
                 placeholder="任務內容（選填）"
                 className="form-textarea"
-                rows={3}
+                rows={4}
+              />
+              <AIContentSuggestion
+                content={newTask.content || ''}
+                onSuggestionApplied={(suggestion) => setNewTask({ ...newTask, content: suggestion })}
               />
             </div>
             <div className="form-group">
@@ -296,7 +294,11 @@ export default function TaskList() {
                     value={editTask.content}
                     onChange={(e) => setEditTask({ ...editTask, content: e.target.value })}
                     className="form-textarea"
-                    rows={2}
+                    rows={3}
+                  />
+                  <AIContentSuggestion
+                    content={editTask.content || ''}
+                    onSuggestionApplied={(suggestion) => setEditTask({ ...editTask, content: suggestion })}
                   />
                   <TagInput
                     tags={editTask.tags || []}
@@ -370,8 +372,6 @@ export default function TaskList() {
         )}
       </div>
 
-      {/* AI 任務生成器 */}
-      <AITaskGenerator onTaskGenerated={handleAIGenerated} />
     </div>
   )
 }
