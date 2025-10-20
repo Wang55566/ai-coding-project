@@ -172,7 +172,7 @@ npm run docker:clean
 
 ### 3. 雲端部署
 
-#### Vercel 部署（推薦）
+#### Vercel 部署
 1. 連接 GitHub 倉庫到 Vercel
 2. 設定環境變數：
    - `NEXT_PUBLIC_SUPABASE_URL`
@@ -180,6 +180,17 @@ npm run docker:clean
    - `OPENAI_API_KEY`
 3. 自動部署完成
 
+#### Netlify 部署
+1. 連接 GitHub 倉庫到 Netlify
+2. 設定構建設定：
+   - **Build command**: `npm run build`
+   - **Publish directory**: `.next`
+   - **Node version**: 18.x 或 20.x
+3. 設定環境變數：
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `OPENAI_API_KEY`
+4. 部署完成
 
 #### Docker 雲端部署
 ```bash
