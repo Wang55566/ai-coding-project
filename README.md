@@ -42,12 +42,14 @@ create table tasks (
   user_id uuid references auth.users(id) on delete cascade not null,
   title text not null,
   content text,
+  tags text[] default '{}',
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
 -- 建立索引
 create index tasks_user_id_idx on tasks(user_id);
+create index tasks_tags_idx on tasks using gin(tags);
 
 -- 啟用 RLS
 alter table tasks enable row level security;

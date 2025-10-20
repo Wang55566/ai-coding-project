@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
-  console.log('API Route 被調用')
-  
   try {
     const { prompt } = await request.json()
 
-    // 驗證輸入
     if (!prompt || typeof prompt !== 'string' || prompt.trim().length === 0) {
       return NextResponse.json(
         { error: '請提供有效的任務描述' },
@@ -21,24 +18,17 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 檢查 OpenAI API key
     if (!process.env.OPENAI_API_KEY) {
-      console.error('OpenAI API key 未設定')
       return NextResponse.json(
-        { error: 'OpenAI API key 未設定，請檢查環境變數設定' },
+        { error: 'OpenAI API key 未設定' },
         { status: 500 }
       )
     }
-
-    console.log('OpenAI API key 已設定，開始生成任務')
     
-    // 使用 OpenAI API 生成任務
     const result = await generateTaskWithOpenAI(prompt)
     return NextResponse.json(result)
 
   } catch (error) {
-    console.error('生成任務時發生錯誤:', error)
-    
     if (error instanceof Error) {
       if (error.message.includes('API key')) {
         return NextResponse.json(
@@ -61,7 +51,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// 真實的 OpenAI 調用函數（當需要時可以啟用）
 async function generateTaskWithOpenAI(prompt: string) {
   const { default: OpenAI } = await import('openai')
   
@@ -103,9 +92,6 @@ async function generateTaskWithOpenAI(prompt: string) {
       content: parsedResponse.content.trim()
     }
   } catch (parseError) {
-    console.error('JSON 解析錯誤:', parseError)
-    console.error('AI 回應:', response)
-    
     const lines = response.split('\n').filter(line => line.trim())
     const title = lines[0]?.replace(/^[#-*\s]*/, '').trim() || '新任務'
     const content = lines.slice(1).join('\n').trim() || '請補充任務詳細內容'
