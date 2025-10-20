@@ -1,6 +1,6 @@
 'use client'
 
-// components/AuthForm.js
+// components/AuthForm.tsx
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 
@@ -9,7 +9,7 @@ export default function AuthForm() {
   const [password, setPassword] = useState('')
   const [isLogin, setIsLogin] = useState(true)
 
-  const handleAuth = async (e) => {
+  const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     
     if (isLogin) {

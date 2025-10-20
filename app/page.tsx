@@ -1,9 +1,8 @@
 'use client'
 
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../contexts/AuthContext'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { supabase } from '../lib/supabase'
 
 export default function Home() {
   const { user, loading } = useAuth()
@@ -15,15 +14,6 @@ export default function Home() {
     }
   }, [user, loading, router])
 
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut()
-    if (error) {
-      console.error('登出錯誤:', error)
-    } else {
-      router.push('/login')
-    }
-  }
-
   if (loading) return <div className="loading-container">載入中...</div>
   
   if (!user) {
@@ -34,12 +24,7 @@ export default function Home() {
     <div className="page-container">
       <div className="container">
         <div className="card">
-          <div className="page-header">
-            <h1 className="page-title">儀表板</h1>
-            <button onClick={handleLogout} className="btn btn-secondary">
-              登出
-            </button>
-          </div>
+          <h1 className="page-title">儀表板</h1>
           <div className="info-section">
             <p><span className="label">用戶 ID:</span> {user.id}</p>
             <p><span className="label">郵箱:</span> {user.email}</p>
