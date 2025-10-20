@@ -1,0 +1,81 @@
+Vercel CLI 48.4.1
+> [debug] [2025-10-20T18:11:48.913Z] user supplied known subcommand: "build"
+> [debug] [2025-10-20T18:11:48.975Z] Found ".git/config" - detected "/Users/sengwang/Documents/ai-coding-assignment" as repo root
+WARN! Build not running on Vercel. System environment variables will not be available.
+> [debug] [2025-10-20T18:11:48.983Z] Loaded environment variables from "/Users/sengwang/Documents/ai-coding-assignment/.vercel/.env.preview.local"
+> [debug] [2025-10-20T18:11:48.993Z] Locating files /Users/sengwang/Documents/ai-coding-assignment
+> [debug] [2025-10-20T18:11:48.993Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/.dockerignore
+> [debug] [2025-10-20T18:11:48.994Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/.env.local
+> [debug] [2025-10-20T18:11:48.994Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/.git
+> [debug] [2025-10-20T18:11:48.994Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/.gitignore
+> [debug] [2025-10-20T18:11:48.994Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/.next
+> [debug] [2025-10-20T18:11:48.994Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/.vercel
+> [debug] [2025-10-20T18:11:48.995Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/Dockerfile
+> [debug] [2025-10-20T18:11:48.995Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/build-debug.log
+> [debug] [2025-10-20T18:11:48.995Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/docker-compose.dev.yml
+> [debug] [2025-10-20T18:11:48.995Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/docker-compose.prod.yml
+> [debug] [2025-10-20T18:11:48.995Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/docker-compose.yml
+> [debug] [2025-10-20T18:11:48.995Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/node_modules
+> [debug] [2025-10-20T18:11:48.995Z] Ignoring /Users/sengwang/Documents/ai-coding-assignment/public
+> [debug] [2025-10-20T18:11:48.996Z] Locating files /Users/sengwang/Documents/ai-coding-assignment [3ms]
+> [debug] [2025-10-20T18:11:49.028Z] Imported Builder "@vercel/next" from "/Users/sengwang/.config/yarn/global/node_modules/@vercel/next"
+> [debug] [2025-10-20T18:11:49.032Z] Setting env VERCEL_PROJECT_SETTINGS_NODE_VERSION to "22.x"
+> [debug] [2025-10-20T18:11:49.032Z] Building entrypoint "package.json" with "@vercel/next"
+WARNING: You should not upload the `.next` directory.
+Installing dependencies...
+npm warn Unknown cli config "--unsafe-perm". This will stop working in the next major version of npm.
+
+up to date in 130ms
+
+27 packages are looking for funding
+  run `npm fund` for details
+Detected Next.js version: 15.5.6
+Running "npm run build"
+
+> ai-coding-assignment@0.1.0 build
+> next build
+
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'serverComponentsExternalPackages' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ⚠ `experimental.serverComponentsExternalPackages` has been moved to `serverExternalPackages`. Please update your next.config.ts file accordingly.
+   ▲ Next.js 15.5.6
+   - Environments: .env.local
+   - Experiments (use with caution):
+     · serverComponentsExternalPackages
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 919ms
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/8) ...
+   Generating static pages (2/8) 
+   Generating static pages (4/8) 
+   Generating static pages (6/8) 
+ ✓ Generating static pages (8/8)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                    4.77 kB         155 kB
+├ ○ /_not-found                            997 B         103 kB
+├ ƒ /api/generate-task                     120 B         102 kB
+├ ○ /login                               1.59 kB         155 kB
+└ ○ /signup                              1.87 kB         156 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/255-cf2e1d3491ac955b.js       45.8 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
+  └ other shared chunks (total)          1.92 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+Traced Next.js server files in: 94.945ms
+Created all serverless functions in: 56.275ms
+Collected static files (public/, static/, .next/static): 1.934ms
+Build Completed in .vercel/output [7s]
+> [debug] [2025-10-20T18:11:56.416Z] Vercel CLI 48.4.1
+
+> [debug] [2025-10-20T18:11:57.016Z] Telemetry event tracked
+> [debug] [2025-10-20T18:11:57.235Z] Telemetry subprocess exited with code 0
