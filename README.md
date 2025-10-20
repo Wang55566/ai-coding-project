@@ -77,7 +77,7 @@ create trigger update_tasks_updated_at
 
 ## 開始使用
 
-First, run the development server:
+### 本地開發
 
 ```bash
 npm run dev
@@ -91,7 +91,91 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Docker 開發環境
+
+#### 前置需求
+
+- Docker Desktop
+- Docker Compose
+
+#### 快速開始
+
+1. **複製環境變數範例**：
+```bash
+cp env.template .env.local
+```
+
+2. **編輯環境變數**：
+編輯 `.env.local` 檔案，填入你的 Supabase 和 OpenAI API 金鑰。
+
+3. **啟動開發環境**：
+```bash
+npm run docker:dev
+# 或
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+```
+
+4. **訪問應用**：
+打開 [http://localhost:3000](http://localhost:3000)
+
+#### Docker 指令
+
+```bash
+# 開發環境
+npm run docker:dev          # 啟動開發環境
+npm run docker:down         # 停止容器
+npm run docker:logs         # 查看日誌
+
+# 生產環境
+npm run docker:build        # 構建生產鏡像
+npm run docker:prod         # 啟動生產環境
+npm run docker:clean        # 清理所有容器和鏡像
+```
+
+#### Docker 配置說明
+
+- **開發環境** (`docker-compose.dev.yml`)：
+  - 支援 hot reload
+  - 掛載源代碼目錄
+  - 詳細日誌輸出
+
+- **生產環境** (`docker-compose.prod.yml`)：
+  - 優化構建
+  - 資源限制
+  - 健康檢查
+
+#### 環境變數
+
+複製 `env.template` 到 `.env.local` 並填入：
+
+```env
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# OpenAI API Configuration
+OPENAI_API_KEY=your_openai_api_key
+```
+
+#### 常見問題
+
+1. **權限問題**（Linux/macOS）：
+```bash
+sudo chown -R $USER:$USER .
+```
+
+2. **端口被佔用**：
+修改 `docker-compose.yml` 中的端口映射：
+```yaml
+ports:
+  - "3001:3000"  # 使用 3001 端口
+```
+
+3. **清理 Docker 資源**：
+```bash
+npm run docker:clean
+docker system prune -a
+```
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
