@@ -41,8 +41,3 @@ build-debug.log
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# duplicate files
-app/favicon.ico
-
-.env
