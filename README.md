@@ -1,6 +1,33 @@
-# AI AI 任務筆記系統
+# AI 任務管理系統
 
 一個基於 Next.js 15 和 Supabase 的現代化任務管理應用，具備 AI 自動生成任務、標籤管理、搜尋功能，並支援完整的 Docker 容器化部署。
+
+## 📋 專案概述
+
+本專案是一個全功能的任務管理系統，整合了現代化的前端技術、AI 智能生成、以及完整的用戶認證系統。專案採用 Next.js 15 的 App Router 架構，結合 Supabase 作為後端服務，提供安全可靠的任務管理解決方案。
+
+### 🎯 核心功能
+- **智能任務生成**：使用 OpenAI GPT-3.5 根據自然語言描述自動生成任務
+- **標籤管理系統**：支援多標籤分類和模糊搜尋
+- **用戶認證**：基於 Supabase 的安全認證機制
+- **響應式設計**：適配各種設備的現代化 UI
+- **容器化部署**：完整的 Docker 支援，便於部署和擴展
+
+## 🖼️ 專案截圖
+
+### 主頁面
+- 任務列表展示
+- AI 生成按鈕（右下角）
+- 搜尋和標籤功能
+
+### 登入/註冊頁面
+- 現代化的認證界面
+- 響應式設計
+
+### AI 任務生成
+- 浮動對話框
+- 自然語言輸入
+- 智能任務建議
 
 ## 🏗️ 專案架構
 
@@ -74,17 +101,36 @@ tasks 表結構：
 
 ### 開發工具
 - **Turbopack** - 快速打包工具
+- **TypeScript** - 靜態類型檢查
+- **ESLint** - 代碼品質檢查（可選）
 
 ### 容器化
 - **Docker** - 容器化平台
 - **Docker Compose** - 多容器編排
 - **多階段構建** - 優化鏡像大小
+- **Alpine Linux** - 輕量級基礎鏡像
+
+### 安全與認證
+- **Supabase Auth** - 用戶認證和授權
+- **Row Level Security (RLS)** - 資料庫層級安全
+- **JWT Token** - 安全的身份驗證
+- **環境變數保護** - 敏感資訊安全存儲
 
 ## 🚀 部署方式
+
+### 環境要求
+- **Node.js**: 18.0.0 或更高版本
+- **npm**: 8.0.0 或更高版本
+- **Docker**: 20.10.0 或更高版本（可選）
+- **Docker Compose**: 2.0.0 或更高版本（可選）
 
 ### 1. 本地開發部署
 
 ```bash
+# 克隆專案
+git clone <your-repo-url>
+cd ai-coding-assignment
+
 # 安裝依賴
 npm install
 
@@ -95,6 +141,8 @@ cp env.template .env.local
 # 啟動開發服務器
 npm run dev
 ```
+
+訪問 [http://localhost:3000](http://localhost:3000) 查看應用
 
 ### 2. Docker 容器化部署
 
@@ -124,13 +172,14 @@ npm run docker:clean
 
 ### 3. 雲端部署
 
-#### Vercel 部署
+#### Vercel 部署（推薦）
 1. 連接 GitHub 倉庫到 Vercel
 2. 設定環境變數：
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - `OPENAI_API_KEY`
 3. 自動部署完成
+
 
 #### Docker 雲端部署
 ```bash
@@ -257,3 +306,5 @@ npm run dev
 ```bash
 npm run docker:dev
 ```
+
+**注意**: 本專案僅供學習和展示用途，請勿用於商業用途。
