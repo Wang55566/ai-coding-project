@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
-import { supabase } from '../lib/supabase'
-import { useAuth } from '../contexts/AuthContext'
-import type { Task, CreateTaskData, UpdateTaskData } from '../lib/types'
+import { supabase } from '@/lib/supabase'
+import { useAuth } from '@/contexts/AuthContext'
+import type { Task, CreateTaskData, UpdateTaskData } from '@/lib/types'
+import AITaskGenerator from './AITaskGenerator'
 import AIContentSuggestion from './AIContentSuggestion'
 import TagInput from './TagInput'
 import TagBadge from './TagBadge'
@@ -146,6 +147,12 @@ export default function TaskList() {
   const cancelEdit = () => {
     setEditingId(null)
     setEditTask({ title: '', content: '', tags: [] })
+  }
+
+  // AI 生成任務回調
+  const handleAIGenerated = (title: string, content: string) => {
+    setNewTask({ title, content, tags: [] })
+    setIsAdding(true)
   }
 
   // 搜尋功能
@@ -372,6 +379,8 @@ export default function TaskList() {
         )}
       </div>
 
+      {/* AI 任務生成器 */}
+      <AITaskGenerator onTaskGenerated={handleAIGenerated} />
     </div>
   )
 }

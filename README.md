@@ -34,7 +34,9 @@
 ### 前端架構
 ```
 app/                          # Next.js App Router
-├── api/improve-content/      # AI 內容建議 API
+├── api/
+│   ├── generate-task/        # AI 任務生成 API
+│   └── improve-content/      # AI 內容建議 API
 ├── login/                    # 登入頁面
 ├── signup/                   # 註冊頁面
 ├── page.tsx                  # 主頁（任務列表）
@@ -44,6 +46,7 @@ app/                          # Next.js App Router
 components/                   # React 組件
 ├── Header.tsx                # 頁面頭部
 ├── TaskList.tsx              # 任務列表主組件
+├── AITaskGenerator.tsx       # AI 任務生成器
 ├── AIContentSuggestion.tsx   # AI 內容建議組件
 ├── TagInput.tsx              # 標籤輸入組件
 ├── TagBadge.tsx              # 標籤顯示組件
@@ -64,9 +67,9 @@ styles/                       # 樣式文件
 ```
 
 ### 後端架構
-- **Next.js API Routes**: 處理 AI 內容建議請求
+- **Next.js API Routes**: 處理 AI 任務生成和內容建議請求
 - **Supabase**: 提供認證、資料庫和即時功能
-- **OpenAI API**: 整合 GPT-3.5 進行內容分析和優化
+- **OpenAI API**: 整合 GPT-3.5 進行任務生成和內容分析
 
 ### 資料庫設計
 ```sql
@@ -208,7 +211,21 @@ docker run -p 3000:3000 \
 
 ## 🤖 AI 工具輔助使用情境
 
-### 1. 智能內容建議與摘要
+### 1. AI 任務自動生成
+**使用情境**：用戶輸入自然語言描述，AI 自動生成結構化任務
+- **輸入範例**：「明天要準備客戶簡報」
+- **AI 處理**：分析需求，生成標題和詳細內容
+- **輸出結果**：
+  ```json
+  {
+    "title": "準備客戶簡報",
+    "content": "1. 整理客戶資料\n2. 製作簡報投影片\n3. 準備 Q&A 資料\n4. 測試簡報設備"
+  }
+  ```
+- **使用方式**：點擊右下角浮動按鈕「AI 生成任務」
+- **技術實現**：使用 OpenAI GPT-3.5-turbo 模型進行任務分析
+
+### 2. 智能內容建議與摘要
 **使用情境**：用戶輸入任務內容後，AI 根據內容長度自動提供改善建議或摘要
 - **功能特點**：
   - **短內容（≤100字）**：提供改善建議，優化文字表達和結構
@@ -218,7 +235,7 @@ docker run -p 3000:3000 \
 - **適用場景**：新增任務和編輯任務時都可使用
 - **技術實現**：使用 OpenAI GPT-3.5-turbo 模型進行智能內容分析
 
-### 2. 自然語言處理
+### 3. 自然語言處理
 **使用情境**：將用戶的模糊描述轉換為具體可執行的任務
 - **語言支援**：支援中文和英文輸入
 - **上下文理解**：AI 理解任務的優先級和時效性

@@ -1,9 +1,9 @@
 'use client'
 
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '@/contexts/AuthContext'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import TaskList from '../components/TaskList'
+import TaskList from '@/components/TaskList'
 
 export default function Home() {
   const { user, loading } = useAuth()
