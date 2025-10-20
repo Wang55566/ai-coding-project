@@ -29,6 +29,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+build-debug.log
+*.log
 
 # env files (can opt-in for committing if needed)
 .env*
@@ -39,5 +41,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# duplicate files
+app/favicon.ico
 
 .env
