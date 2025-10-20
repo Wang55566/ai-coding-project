@@ -71,46 +71,52 @@ export default function Login() {
         <form className="auth-form" onSubmit={handleLogin}>
           {error && (
             <div className="error-message">
+              <span className="error-icon">⚠</span>
               {error}
             </div>
           )}
           
-          <div className="form-fields">
+          <div className="auth-form-group">
+            <label className="auth-form-label">郵箱</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="郵箱"
+              placeholder="請輸入您的郵箱"
               required
-              className="form-input"
+              className="auth-form-input"
             />
+          </div>
+          
+          <div className="auth-form-group">
+            <label className="auth-form-label">密碼</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="密碼"
+              placeholder="請輸入您的密碼"
               required
-              className="form-input"
+              className="auth-form-input"
             />
           </div>
 
-          <div>
+          <div className="auth-form-actions">
             <button
               type="submit"
               disabled={loading}
-              className="btn btn-primary"
+              className={`auth-form-submit ${loading ? 'loading' : ''}`}
             >
               {loading ? '登入中...' : '登入'}
             </button>
           </div>
 
-          <div className="auth-footer">
-            <p className="auth-text">
+          <div className="auth-form-links">
+            <span className="auth-text">
               還沒有帳號？{' '}
-              <Link href="/signup" className="auth-link">
+              <Link href="/signup" className="auth-form-link">
                 立即註冊
               </Link>
-            </p>
+            </span>
           </div>
         </form>
       </div>

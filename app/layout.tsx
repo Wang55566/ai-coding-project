@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "任務管理系統",
+  title: "AI 任務筆記系統",
   description: "用戶認證應用",
 };
 

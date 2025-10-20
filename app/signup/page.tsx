@@ -80,17 +80,16 @@ export default function Signup() {
     return (
       <div className="auth-container">
         <div className="success-container">
-          <div className="success-card">
-            <h2 className="success-title">
-              註冊成功！
-            </h2>
-            <p className="success-message">
-              請檢查您的郵箱並點擊確認連結來完成註冊。
-            </p>
-            <Link href="/login" className="btn btn-primary">
-              前往登入
-            </Link>
-          </div>
+          <div className="success-icon">✓</div>
+          <h2 className="success-title">
+            註冊成功！
+          </h2>
+          <p className="success-message">
+            請檢查您的郵箱並點擊確認連結來完成註冊。
+          </p>
+          <Link href="/login" className="auth-form-submit">
+            前往登入
+          </Link>
         </div>
       </div>
     )
@@ -111,54 +110,64 @@ export default function Signup() {
         <form className="auth-form" onSubmit={handleSignup}>
           {error && (
             <div className="error-message">
+              <span className="error-icon">⚠</span>
               {error}
             </div>
           )}
           
-          <div className="form-fields">
+          <div className="auth-form-group">
+            <label className="auth-form-label">郵箱</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="郵箱"
+              placeholder="請輸入您的郵箱"
               required
-              className="form-input"
+              className="auth-form-input"
             />
+          </div>
+          
+          <div className="auth-form-group">
+            <label className="auth-form-label">密碼</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="密碼（至少6個字符）"
+              placeholder="請輸入密碼（至少6個字符）"
               required
-              className="form-input"
+              className="auth-form-input"
             />
+          </div>
+          
+          <div className="auth-form-group">
+            <label className="auth-form-label">確認密碼</label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="確認密碼"
+              placeholder="請再次輸入密碼"
               required
-              className="form-input"
+              className="auth-form-input"
             />
           </div>
 
-          <div>
+          <div className="auth-form-actions">
             <button
               type="submit"
               disabled={loading}
-              className="btn btn-primary"
+              className={`auth-form-submit ${loading ? 'loading' : ''}`}
             >
               {loading ? '註冊中...' : '註冊'}
             </button>
           </div>
 
-          <div className="auth-footer">
-            <p className="auth-text">
+          <div className="auth-form-links">
+            <span className="auth-text">
               已有帳號？{' '}
-              <Link href="/login" className="auth-link">
+              <Link href="/login" className="auth-form-link">
                 立即登入
               </Link>
-            </p>
+            </span>
           </div>
         </form>
       </div>

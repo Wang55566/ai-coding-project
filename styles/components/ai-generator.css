@@ -1,42 +1,127 @@
-/* AI Task Generator Styles */
+/* AI Task Generator Styles - Dark Mode */
+
+/* 浮動按鈕容器 */
+.ai-fab-container {
+  position: fixed;
+  bottom: var(--spacing-xl);
+  right: calc(50% - 28px);
+  z-index: 1000;
+}
 
 /* 浮動按鈕 */
 .ai-fab {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--gradient-primary);
   border: none;
   color: white;
   cursor: pointer;
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  box-shadow: var(--shadow-lg);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-fab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.ai-fab:hover::before {
+  transform: translateX(100%);
 }
 
 .ai-fab:hover {
-  transform: translateY(-3px) scale(1.1);
-  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: var(--shadow-xl);
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-dark) 100%);
 }
 
 .ai-fab:active {
-  transform: translateY(-1px) scale(1.05);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .ai-fab-open {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  background: linear-gradient(135deg, var(--error) 0%, var(--error-hover) 100%);
   box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
 }
 
 .ai-fab-open:hover {
   box-shadow: 0 12px 35px rgba(239, 68, 68, 0.5);
+}
+
+/* Tooltip */
+.ai-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  margin-bottom: var(--spacing-md);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.ai-fab-container:hover .ai-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.ai-tooltip-text {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-primary);
+  backdrop-filter: blur(10px);
+  position: relative;
+  display: block;
+  min-width: 120px;
+  text-align: center;
+}
+
+.ai-tooltip-arrow {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--bg-card);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.ai-tooltip-arrow::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--border-primary);
 }
 
 /* 對話框遮罩 */
@@ -241,11 +326,38 @@
 
 /* 響應式設計 */
 @media (max-width: 768px) {
+  .ai-fab-container {
+    bottom: var(--spacing-lg);
+    right: calc(50% - 24px);
+  }
+  
   .ai-fab {
-    bottom: 1rem;
-    right: 1rem;
-    width: 50px;
-    height: 50px;
+    width: 56px;
+    height: 56px;
+  }
+  
+  .ai-tooltip {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .ai-tooltip-text {
+    font-size: 0.8rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-width: 100px;
+  }
+  
+  .ai-tooltip-arrow {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--bg-card);
+  }
+  
+  .ai-tooltip-arrow::before {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--border-primary);
+    top: -7px;
+    left: -6px;
   }
 
   .ai-dialog {
@@ -276,6 +388,40 @@
 }
 
 @media (max-width: 480px) {
+  .ai-fab-container {
+    bottom: var(--spacing-md);
+    right: calc(50% - 20px);
+  }
+  
+  .ai-fab {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .ai-tooltip {
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .ai-tooltip-text {
+    font-size: 0.75rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    min-width: 80px;
+  }
+  
+  .ai-tooltip-arrow {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--bg-card);
+  }
+  
+  .ai-tooltip-arrow::before {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--border-primary);
+    top: -6px;
+    left: -5px;
+  }
+
   .ai-dialog-overlay {
     padding: 0.5rem;
   }
@@ -283,11 +429,6 @@
   .ai-dialog {
     margin: 0;
     border-radius: 0.75rem;
-  }
-
-  .ai-fab {
-    width: 45px;
-    height: 45px;
   }
 }
 

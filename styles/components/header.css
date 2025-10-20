@@ -1,13 +1,14 @@
-/* Header Component */
+/* Header Component - Dark Mode */
 .header {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-  padding: 1.5rem 0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  backdrop-filter: blur(10px);
+  background: var(--bg-glass);
+  border-bottom: 1px solid var(--border-primary);
+  padding: var(--spacing-lg) 0;
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(20px);
   position: sticky;
   top: 0;
   z-index: 50;
+  transition: all 0.3s ease;
 }
 
 .header-content {
@@ -16,13 +17,13 @@
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--spacing-xl);
 }
 
 .logo-section {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--spacing-xs);
 }
 
 .logo-link {
@@ -40,7 +41,7 @@
   font-size: 2rem;
   font-weight: 800;
   margin: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--gradient-secondary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -49,7 +50,7 @@
 }
 
 .logo-link:hover .logo {
-  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  background: var(--gradient-accent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -57,7 +58,7 @@
 
 .tagline {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--text-muted);
   margin: 0;
   font-weight: 500;
   opacity: 0.8;
@@ -66,90 +67,125 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--spacing-lg);
 }
 
 .user-menu {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  background: rgba(248, 250, 252, 0.8);
-  padding: 0.75rem 1rem;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(226, 232, 240, 0.5);
+  gap: var(--spacing-md);
+  background: var(--bg-card);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-primary);
   backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.user-menu:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-secondary);
+  box-shadow: var(--shadow-md);
 }
 
 .user-email {
-  color: #475569;
+  color: var(--text-secondary);
   font-size: 0.875rem;
   font-weight: 600;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--gradient-accent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .user-menu .btn-secondary {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  background: var(--gradient-primary);
   color: white;
   border: none;
-  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+  box-shadow: var(--shadow-sm);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-weight: 500;
 }
 
 .user-menu .btn-secondary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(239, 68, 68, 0.4);
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-dark) 100%);
 }
 
 .auth-links {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
+  gap: var(--spacing-md);
 }
 
 .auth-links .btn-primary {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  background: var(--gradient-primary);
+  box-shadow: var(--shadow-md);
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: var(--spacing-md) var(--spacing-lg);
   font-weight: 600;
+  border-radius: var(--radius-md);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: white;
 }
 
 .auth-links .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-dark) 100%);
 }
 
 /* Loading state */
 .header .loading-container {
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 500;
   font-size: 0.875rem;
 }
 
-/* Responsive Header */
+/* 載入動畫 */
+.loading-message {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.loading-message::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border-primary);
+  border-top: 2px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 響應式 Header */
 @media (max-width: 1024px) {
   .header-content {
-    padding: 0 1.5rem;
+    padding: 0 var(--spacing-lg);
   }
 }
 
 @media (max-width: 768px) {
   .header {
-    padding: 1rem 0;
+    padding: var(--spacing-md) 0;
   }
   
   .header-content {
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--spacing-md);
     text-align: center;
-    padding: 0 1rem;
+    padding: 0 var(--spacing-md);
   }
   
   .logo-section {
@@ -171,8 +207,8 @@
   
   .user-menu {
     flex-direction: column;
-    gap: 0.75rem;
-    padding: 1rem;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
     width: 100%;
     max-width: 300px;
   }
@@ -183,13 +219,13 @@
   }
   
   .auth-links {
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
     justify-content: center;
     width: 100%;
   }
   
   .auth-links .btn-primary {
-    padding: 0.75rem 1.25rem;
+    padding: var(--spacing-md) var(--spacing-lg);
     font-size: 0.875rem;
     width: 100%;
     max-width: 200px;
@@ -198,7 +234,7 @@
 
 @media (max-width: 480px) {
   .header-content {
-    padding: 0 0.75rem;
+    padding: 0 var(--spacing-sm);
   }
   
   .logo {
@@ -206,11 +242,29 @@
   }
   
   .user-menu {
-    padding: 0.75rem;
+    padding: var(--spacing-md);
   }
   
   .user-menu .btn-secondary {
-    padding: 0.5rem 1rem;
+    padding: var(--spacing-sm) var(--spacing-md);
     font-size: 0.8rem;
+  }
+}
+
+/* 深色模式特殊效果 */
+@media (prefers-color-scheme: dark) {
+  .header {
+    background: rgba(15, 15, 15, 0.9);
+    border-bottom-color: rgba(55, 65, 81, 0.5);
+  }
+  
+  .user-menu {
+    background: rgba(30, 30, 30, 0.9);
+    border-color: rgba(55, 65, 81, 0.3);
+  }
+  
+  .user-menu:hover {
+    background: rgba(42, 42, 42, 0.9);
+    border-color: rgba(75, 85, 99, 0.5);
   }
 }
