@@ -3,6 +3,7 @@
 import { useAuth } from '../contexts/AuthContext'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import TaskList from '../components/TaskList'
 
 export default function Home() {
   const { user, loading } = useAuth()
@@ -23,14 +24,7 @@ export default function Home() {
   return (
     <div className="page-container">
       <div className="container">
-        <div className="card">
-          <h1 className="page-title">儀表板</h1>
-          <div className="info-section">
-            <p><span className="label">用戶 ID:</span> {user.id}</p>
-            <p><span className="label">郵箱:</span> {user.email}</p>
-            <p><span className="label">註冊時間:</span> {new Date(user.created_at).toLocaleDateString()}</p>
-          </div>
-        </div>
+        <TaskList />
       </div>
     </div>
   )
