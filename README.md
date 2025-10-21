@@ -149,28 +149,49 @@ npm run dev
 
 ### 2. Docker 容器化部署
 
+#### 統一 Docker Compose 配置
+使用單一 `docker-compose.yml` 檔案，通過環境變數切換開發/生產模式：
+
 #### 開發環境
 ```bash
 # 啟動開發環境（支援 hot reload）
-npm run docker:dev
+DOCKER_ENV=dev docker-compose up
+
+# 背景執行
+DOCKER_ENV=dev docker-compose up -d
 
 # 查看日誌
-npm run docker:logs
+docker-compose logs -f
 
 # 停止容器
-npm run docker:down
+docker-compose down
 ```
 
 #### 生產環境
 ```bash
-# 構建生產鏡像
-npm run docker:build
-
 # 啟動生產環境
-npm run docker:prod
+DOCKER_ENV=prod docker-compose up -d
 
-# 清理所有資源
-npm run docker:clean
+# 查看日誌
+docker-compose logs -f
+
+# 停止容器
+docker-compose down
+```
+
+#### 環境變數配置
+```bash
+# 開發模式（預設，NODE_ENV=development）
+DOCKER_ENV=dev docker-compose up
+
+# 生產模式（NODE_ENV=production）
+DOCKER_ENV=prod docker-compose up -d
+
+# 自定義資源限制
+MEMORY_LIMIT=1G CPU_LIMIT=1.0 docker-compose up -d
+
+# 自定義 NODE_ENV（覆蓋預設值）
+NODE_ENV=production DOCKER_ENV=prod docker-compose up -d
 ```
 
 ### 3. 雲端部署

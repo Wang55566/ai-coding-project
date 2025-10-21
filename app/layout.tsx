@@ -15,8 +15,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI 任務筆記系統",
-  description: "用戶認證應用",
+  title: {
+    default: "AI 任務管理系統",
+    template: "%s | AI 任務管理系統"
+  },
+  description: "智能任務管理與 AI 輔助功能，支援任務生成、內容優化和標籤管理",
+  keywords: ['任務管理', 'AI', 'GPT', '生產力工具', '任務筆記', '智能助手'],
+  authors: [{ name: 'AI Task Manager' }],
+  creator: 'AI Task Manager',
+  openGraph: {
+    title: 'AI 任務管理系統',
+    description: '智能任務管理與 AI 輔助功能，支援任務生成、內容優化和標籤管理',
+    type: 'website',
+    locale: 'zh_TW',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI 任務管理系統',
+    description: '智能任務管理與 AI 輔助功能',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
