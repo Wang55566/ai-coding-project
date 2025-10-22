@@ -56,6 +56,24 @@ export default function Login() {
     setLoading(false)
   }
 
+  const handleDemoLogin = async () => {
+    setLoading(true)
+    setError('')
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: 'a12349743@gmail.com',
+      password: 'password'
+    })
+
+    if (error) {
+      setError(error.message)
+    } else {
+      router.push('/')
+    }
+    
+    setLoading(false)
+  }
+
   return (
     <div className="auth-container">
       <div className="auth-form-container">
@@ -107,6 +125,21 @@ export default function Login() {
               className={`auth-form-submit ${loading ? 'loading' : ''}`}
             >
               {loading ? '登入中...' : '登入'}
+            </button>
+          </div>
+
+          <div className="auth-divider">
+            <span>或</span>
+          </div>
+
+          <div className="auth-form-demo">
+            <button
+              type="button"
+              onClick={handleDemoLogin}
+              disabled={loading}
+              className="auth-form-demo-btn"
+            >
+              🎭 使用 Demo 帳號登入
             </button>
           </div>
 

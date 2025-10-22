@@ -388,6 +388,57 @@
   }
 }
 
+/* Demo User Button Styles */
+.auth-form-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.auth-form-demo-btn {
+  width: 100%;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.auth-form-demo-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-secondary);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.auth-form-demo-btn:active {
+  transform: translateY(0);
+}
+
+.auth-form-demo-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-form-demo-btn:disabled:hover {
+  transform: none;
+  background: var(--bg-card);
+  border-color: var(--border-primary);
+}
+
 /* 深色模式特殊效果 */
 @media (prefers-color-scheme: dark) {
   .auth-form-container {
@@ -413,5 +464,15 @@
       radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
       radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
       radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+  }
+  
+  .auth-form-demo-btn {
+    background: rgba(26, 26, 26, 0.9);
+    border-color: rgba(55, 65, 81, 0.5);
+  }
+  
+  .auth-form-demo-btn:hover {
+    background: rgba(38, 38, 38, 0.9);
+    border-color: rgba(75, 85, 99, 0.7);
   }
 }
